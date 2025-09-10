@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Coeficiente de Variación</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f4f5f7, #e0e5ec);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-y: auto;
+        }
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 -10px 20px rgba(255,255,255,0.8);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        input:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 10px rgba(106, 17, 203, 0.2);
+        }
+        .btn {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .info {
+            background-color: #f0f4ff;
+            padding: 15px;
+            border-radius: 10px;
+            color: #333;
+        }
+        #results, #procedimiento {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="check">
+    <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+      <header>Panel Matemático</header>
+      <ul>
+          <li><a href="Index.html"><i class="fas fa-home"></i>Home</a></li>
+          <li><a href="Media-Armónica.html"><i class="fas fa-calculator"></i>Media Armonica</a></li>
+          <li><a href="Desviacion_media.html"><i class="fas fa-chart-bar"></i>Desviacion Media</a></li>
+          <li><a href="Moda.html"><i class="fas fa-bullseye"></i>Moda</a></li>
+          <li><a href="Rango.html"><i class="fas fa-ruler"></i>Rango</a></li>
+          <li><a href="Desviacion_estandar.html"><i class="fas fa-chart-pie"></i>Desviación Estándar</a></li>
+          <li><a href="Coeficiente_Variacion.html"><i class="fas fa-percent"></i>Coeficiente Variación</a></li>
+          <li><a href="media aritmetica.html"><i class="fas fa-square-root-alt"></i>Media Aritmética</a></li>
+          <li><a href="Media_Geométrica.html"><i class="fas fa-chart-line"></i>Media Geométrica</a></li>
+          <li><a href="mediana.html"><i class="fas fa-balance-scale"></i>Mediana</a></li>
+          <li><a href="Varianza.html"><i class="fas fa-signal"></i>Varianza</a></li>
+          git add .
+
+      </ul>
+    </div>
+    <div class="container">
+        <h1>Calculadora de Coeficiente de Variación</h1>
+        <input type="text" id="numberInput" placeholder="Ingrese números separados por coma (Ej: 5,10,15)">
+        <button class="btn" onclick="calcularCoeficienteDeVariacion()">Calcular</button>
+        <button class="btn" onclick="borrarTodo()">Borrar Todo</button>
+        <div id="results"></div>
+        <div id="procedimiento"></div>
+        <div class="info">
+            <strong>¿Qué es el Coeficiente de Variación?</strong>
+            <p>El coeficiente de variación es una medida relativa de la dispersión de los datos. Se calcula como la desviación estándar dividida entre la media y se expresa como un porcentaje.</p>
+        </div>
+    </div>
+
+    <script>
+        function calcularCoeficienteDeVariacion() {
+            const input = document.getElementById('numberInput').value.trim();
+            const numeros = input.split(',').map(num => parseFloat(num.trim()));
+
+            // Validar la entrada
+            if (numeros.some(isNaN) || numeros.length === 0) {
+                document.getElementById('results').innerText = 'Error: Ingrese números válidos separados por comas.';
+                document.getElementById('procedimiento').innerText = '';
+                return;
+            }
+
+            // Calcular la suma y la media
+            const suma = numeros.reduce((acc, num) => acc + num, 0);
+            const media = suma / numeros.length;
+
+            // Detalles de la suma
+            const sumaDetalles = numeros.map((num, index) => `${num}${index < numeros.length - 1 ? ' + ' : ''}`).join('');
+
+            // Calcular la desviación estándar
+            const varianza = numeros.reduce((acc, num) => acc + Math.pow(num - media, 2), 0) / numeros.length;
+            const desviacionEstandar = Math.sqrt(varianza);
+
+            // Detalles de la varianza
+            const pasosVarianza = numeros
+                .map(num => `(${num} - ${media.toFixed(2)})²`)
+                .join(' + ');
+            const sumaVarianza = numeros
+                .map(num => Math.pow(num - media, 2).toFixed(2))
+                .join(' + ');
+
+            // Calcular el coeficiente de variación
+            const coeficienteDeVariacion = (desviacionEstandar / media) * 100;
+
+            // Mostrar los resultados
+            document.getElementById('results').innerHTML = `
+                <strong>Resultados:</strong>
+                <p>Media: ${media.toFixed(2)}</p>
+                <p>Desviación Estándar: ${desviacionEstandar.toFixed(2)}</p>
+                <p>Coeficiente de Variación: ${coeficienteDeVariacion.toFixed(2)}%</p>
+            `;
+
+            // Mostrar el procedimiento detallado
+            document.getElementById('procedimiento').innerHTML = `
+                <strong>Procedimiento:</strong>
+                <p><strong>Suma:</strong> ${sumaDetalles} = ${suma.toFixed(2)}</p>
+                <p><strong>Media:</strong> Suma / Número de Elementos = ${suma.toFixed(2)} / ${numeros.length} = ${media.toFixed(2)}</p>
+                <p><strong>Varianza:</strong> [${pasosVarianza}] / ${numeros.length} = (${sumaVarianza}) / ${numeros.length} = ${varianza.toFixed(2)}</p>
+                <p><strong>Desviación Estándar:</strong> √Varianza = √${varianza.toFixed(2)} = ${desviacionEstandar.toFixed(2)}</p>
+                <p><strong>Coeficiente de Variación:</strong> (Desviación Estándar / Media) * 100 = (${desviacionEstandar.toFixed(2)} / ${media.toFixed(2)}) * 100 = ${coeficienteDeVariacion.toFixed(2)}%</p>
+            `;
+        }
+
+        function borrarTodo() {
+            document.getElementById('numberInput').value = ''; // Limpiar el campo de entrada
+            document.getElementById('results').innerText = ''; // Limpiar los resultados
+            document.getElementById('procedimiento').innerText = ''; // Limpiar el procedimiento
+        }
+    </script>
+</body>
+</html>

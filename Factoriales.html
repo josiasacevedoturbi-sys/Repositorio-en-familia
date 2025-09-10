@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Factoriales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        /* Container Styling */
+        .container {
+            text-align: center;
+            background: #fff;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+
+        /* Input Field */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Styling */
+        button {
+            background: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Result Text */
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #333;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        p:empty {
+            display: none; /* Hide empty result paragraph */
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="check">
+    <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+      <header>Panel Matemático</header>
+      <ul>
+          <li><a href="Index.html"><i class="fas fa-home"></i>Home</a></li>
+          <li><a href="Media-Armónica.html"><i class="fas fa-calculator"></i>Media Armonica</a></li>
+          <li><a href="Desviacion_media.html"><i class="fas fa-chart-bar"></i>Desviacion Media</a></li>
+          <li><a href="Moda.html"><i class="fas fa-bullseye"></i>Moda</a></li>
+          <li><a href="Rango.html"><i class="fas fa-ruler"></i>Rango</a></li>
+          <li><a href="Desviacion_estandar.html"><i class="fas fa-chart-pie"></i>Desviación Estándar</a></li>
+          <li><a href="Coeficiente_Variacion.html"><i class="fas fa-percent"></i>Coeficiente Variación</a></li>
+          <li><a href="media aritmetica.html"><i class="fas fa-square-root-alt"></i>Media Aritmética</a></li>
+          <li><a href="Media_Geométrica.html"><i class="fas fa-chart-line"></i>Media Geométrica</a></li>
+          <li><a href="mediana.html"><i class="fas fa-balance-scale"></i>Mediana</a></li>
+          <li><a href="Varianza.html"><i class="fas fa-signal"></i>Varianza</a></li>
+          <li><a href="Factoriales.html"><i class="fas fa-superscript"></i>Factoriales</a></li>
+      </ul>
+    </div>
+    <div class="container">
+        <h1>Calculadora de Factoriales</h1>
+        <input type="number" id="numberInput" placeholder="Ingresa un número" min="0">
+        <button onclick="calculateFactorial()">Calcular Factorial</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function calculateFactorial() {
+            const number = parseInt(document.getElementById("numberInput").value);
+            let resultElement = document.getElementById("result");
+
+            if (isNaN(number) || number < 0) {
+                resultElement.textContent = "Por favor, ingresa un número válido (≥ 0).";
+                return;
+            }
+
+            let factorial = 1;
+            for (let i = 1; i <= number; i++) {
+                factorial *= i;
+            }
+
+            resultElement.textContent = `El factorial de ${number} es ${factorial}.`;
+        }
+    </script>
+</body>
+</html>

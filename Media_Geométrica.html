@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Media Geométrica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <input type="checkbox" id="check">
+    <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+      <header>Panel Matemático</header>
+      <ul>
+          <li><a href="Index.html"><i class="fas fa-home"></i>Home</a></li>
+          <li><a href="Media-Armónica.html"><i class="fas fa-calculator"></i>Media Armonica</a></li>
+          <li><a href="Desviacion_media.html"><i class="fas fa-chart-bar"></i>Desviacion Media</a></li>
+          <li><a href="Moda.html"><i class="fas fa-bullseye"></i>Moda</a></li>
+          <li><a href="Rango.html"><i class="fas fa-ruler"></i>Rango</a></li>
+          <li><a href="Desviacion_estandar.html"><i class="fas fa-chart-pie"></i>Desviación Estándar</a></li>
+          <li><a href="Coeficiente_Variacion.html"><i class="fas fa-percent"></i>Coeficiente Variación</a></li>
+          <li><a href="media aritmetica.html"><i class="fas fa-square-root-alt"></i>Media Aritmética</a></li>
+          <li><a href="Media_Geométrica.html"><i class="fas fa-chart-line"></i>Media Geométrica</a></li>
+          <li><a href="mediana.html"><i class="fas fa-balance-scale"></i>Mediana</a></li>
+          <li><a href="Varianza.html"><i class="fas fa-signal"></i>Varianza</a></li>
+          <li><a href="Factoriales.html"><i class="fas fa-superscript"></i>Factoriales</a></li>
+      </ul>
+    </div>
+    <div class="video-background">
+        <video autoplay loop muted>
+            <source src="../Media aritmetica y mediana/mp4/fondo.mp4" type="video/mp4">
+           
+        </video>
+    </div>
+    <style>
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --background-color: #f4f5f7;
+            --text-color: #333;
+            --card-color: white;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--background-color), #e0e5ec);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-color);
+            border-radius: 20px;
+            box-shadow: 
+                10px 10px 20px rgba(0,0,0,0.1), 
+                -10px -10px 20px rgba(255,255,255,0.8);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-weight: 600;
+            width: 48%; /* Ambos botones ocupan el mismo ancho */
+            box-sizing: border-box; /* Asegura que el tamaño incluye bordes y relleno */
+        }
+    
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        #results {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.05);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .result-item strong {
+            color: var(--primary-color);
+        }
+
+        .info {
+            background-color: #f0fff4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 0 10px;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #f0f0f0;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Media Geométrica</h1>
+        
+        <div class="input-group">
+            <input 
+                type="text" 
+                id="numberInput" 
+                placeholder="Ingrese números separados por coma (Ej: 2,4,6,8,10)"
+            >
+        </div>
+        
+        <button onclick="calcularMediaGeometrica()" class="btn">
+            Calcular 
+        </button>
+        
+        <button onclick="borrarTodo()" class="btn">
+            Borrar Todo
+        </button>
+        
+        <div id="results"></div>
+        <div id="procedimiento"></div>
+
+        <div class="info">
+            <strong>¿Qué es la Media Geométrica?</strong>
+            <p>La Media Geométrica es la raíz nésima del producto de n números. Es útil para calcular promedios de porcentajes o tasas de crecimiento.</p>
+        </div>
+    </div>
+
+    <script>
+        function mediaGeometrica(numeros) {
+            const producto = numeros.reduce((acum, num) => acum * num, 1);
+            return Math.pow(producto, 1 / numeros.length);
+        }
+
+        function calcularMediaGeometrica() {
+            const input = document.getElementById('numberInput').value;
+            const numeros = input.split(',').map(num => parseFloat(num.trim()));
+            
+            const resultsDiv = document.getElementById('results');
+            const procedimientoDiv = document.getElementById('procedimiento');
+            
+            if (numeros.some(isNaN)) {
+                resultsDiv.innerHTML = 'Por favor, ingrese números válidos separados por comas.';
+                procedimientoDiv.innerHTML = '';
+                return;
+            }
+
+            const geometrica = mediaGeometrica(numeros);
+            
+            let procedimiento = `Paso 1: Multiplicar todos los números: ${numeros.join(' * ')} = ${numeros.reduce((acum, num) => acum * num, 1)}<br>`;
+            procedimiento += `Paso 2: Tomar la raíz nésima del producto (con n = ${numeros.length}): √${numeros.length}(${numeros.reduce((acum, num) => acum * num, 1)}) = ${geometrica.toFixed(4)}`;
+            
+            resultsDiv.innerHTML = `<p><strong>Media Geométrica:</strong> ${geometrica.toFixed(4)}</p>`;
+            procedimientoDiv.innerHTML = `<strong>Procedimiento:</strong><br>${procedimiento}`;
+        }
+
+        function borrarTodo() {
+            document.getElementById('numberInput').value = '';
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('procedimiento').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
